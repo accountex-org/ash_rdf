@@ -6,28 +6,38 @@ defmodule AshRdf.Dsl.Sections.Rdf.Statement do
   form the basic data structure of the semantic web.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:statement)
-    desc("Defines an RDF statement (triple)")
-    
-    option :subject, :string,
-      required: true,
-      doc: "The subject of the statement (resource identifier)"
-      
-    option :predicate, :string,
-      required: true,
-      doc: "The predicate of the statement (property identifier)"
-      
-    option :object, :any,
-      required: true,
-      doc: "The object of the statement (resource identifier or literal value)"
-      
-    option :language, :string,
-      doc: "Language tag for literal values"
-      
-    option :datatype, :string,
-      doc: "Datatype URI for literal values"
-  end
+  @section %Spark.Dsl.Section{
+    name: :statement,
+    describe: "Defines an RDF statement (triple)",
+    schema: [
+      subject: [
+        type: :string,
+        required: true,
+        doc: "The subject of the statement (resource identifier)"
+      ],
+      predicate: [
+        type: :string,
+        required: true,
+        doc: "The predicate of the statement (property identifier)"
+      ],
+      object: [
+        type: :any,
+        required: true,
+        doc: "The object of the statement (resource identifier or literal value)"
+      ],
+      language: [
+        type: :string,
+        doc: "Language tag for literal values"
+      ],
+      datatype: [
+        type: :string,
+        doc: "Datatype URI for literal values"
+      ]
+    ]
+  }
+  
+  @doc """
+  Returns the RDF statement DSL section.
+  """
+  def build, do: @section
 end

@@ -134,16 +134,18 @@ defmodule AshRdf.Rdf.Serializer do
     end)
     
     # Create final JSON-LD document
-    result = %{
+    document = %{
       "@context" => context,
       "@graph" => nodes
     }
     
     # This is simple string formatting - a real implementation would use Poison or Jason
-    Jason.encode!(result, pretty: true)
-  rescue
-    # If Jason is not available, fall back to a simple string representation
-    _ ->
-      inspect(result, pretty: true)
+    try do
+      Jason.encode!(document, pretty: true)
+    rescue
+      # If Jason is not available, fall back to a simple string representation
+      _ ->
+        inspect(document, pretty: true)
+    end
   end
 end

@@ -3,13 +3,19 @@ defmodule AshRdf.Dsl.Sections.Owl.EquivalentClass do
   DSL section for defining equivalent class relationships in OWL.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:equivalent_to)
-    desc("Defines a class equivalence relationship")
-    
-    option :class_uri, :string,
-      doc: "The URI of the equivalent class"
-  end
+  @section %Spark.Dsl.Section{
+    name: :equivalent_to,
+    describe: "Defines a class equivalence relationship",
+    schema: [
+      class_uri: [
+        type: :string,
+        doc: "The URI of the equivalent class"
+      ]
+    ]
+  }
+  
+  @doc """
+  Returns the OWL equivalent class DSL section.
+  """
+  def build, do: @section
 end

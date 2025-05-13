@@ -3,13 +3,19 @@ defmodule AshRdf.Dsl.Sections.Owl.DisjointClass do
   DSL section for defining disjoint class relationships in OWL.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:disjoint_with)
-    desc("Defines a class disjointness relationship")
-    
-    option :class_uri, :string,
-      doc: "The URI of the disjoint class"
-  end
+  @section %Spark.Dsl.Section{
+    name: :disjoint_with,
+    describe: "Defines a class disjointness relationship",
+    schema: [
+      class_uri: [
+        type: :string,
+        doc: "The URI of the disjoint class"
+      ]
+    ]
+  }
+  
+  @doc """
+  Returns the OWL disjoint class DSL section.
+  """
+  def build, do: @section
 end

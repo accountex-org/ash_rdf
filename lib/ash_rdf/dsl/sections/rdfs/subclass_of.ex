@@ -3,13 +3,19 @@ defmodule AshRdf.Dsl.Sections.Rdfs.SubclassOf do
   DSL section for defining RDFS subclass relationships.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:subclass_of)
-    desc("Defines a subclass relationship")
-    
-    option :class_uri, :string,
-      doc: "The URI of the parent class"
-  end
+  @section %Spark.Dsl.Section{
+    name: :subclass_of,
+    describe: "Defines a subclass relationship",
+    schema: [
+      class_uri: [
+        type: :string,
+        doc: "The URI of the parent class"
+      ]
+    ]
+  }
+  
+  @doc """
+  Returns the RDFS subclass relationship DSL section.
+  """
+  def build, do: @section
 end

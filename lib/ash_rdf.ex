@@ -63,6 +63,9 @@ defmodule AshRdf do
   use Spark.Dsl.Extension,
     transformers: [
       AshRdf.Transformers.ValidateRdfStructure
+    ],
+    verifiers: [
+      AshRdf.Verifiers.ValidateUri
     ]
 
   @doc """

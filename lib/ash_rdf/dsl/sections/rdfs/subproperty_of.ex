@@ -3,13 +3,19 @@ defmodule AshRdf.Dsl.Sections.Rdfs.SubpropertyOf do
   DSL section for defining RDFS subproperty relationships.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:subproperty_of)
-    desc("Defines a subproperty relationship")
-    
-    option :property_uri, :string,
-      doc: "The URI of the parent property"
-  end
+  @section %Spark.Dsl.Section{
+    name: :subproperty_of,
+    describe: "Defines a subproperty relationship",
+    schema: [
+      property_uri: [
+        type: :string,
+        doc: "The URI of the parent property"
+      ]
+    ]
+  }
+  
+  @doc """
+  Returns the RDFS subproperty relationship DSL section.
+  """
+  def build, do: @section
 end

@@ -4,9 +4,9 @@ defmodule AshRdf.Dsl do
   """
 
   @sections [
-    AshRdf.Dsl.Sections.Rdf,
-    AshRdf.Dsl.Sections.Rdfs,
-    AshRdf.Dsl.Sections.Owl
+    AshRdf.Dsl.Sections.Rdf.build(),
+    AshRdf.Dsl.Sections.Rdfs.build(),
+    AshRdf.Dsl.Sections.Owl.build()
   ]
 
   use Spark.Dsl.Extension, sections: @sections

@@ -23,8 +23,8 @@ defmodule AshRdf.MixProject do
   defp deps do
     [
       {:igniter, "~> 0.5", only: [:dev, :test]},
-      {:ash, "~> 2.20"},
-      {:spark, "~> 2.1"},
+      {:ash, "~> 3.0"},
+      {:spark, "~> 2.0"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end

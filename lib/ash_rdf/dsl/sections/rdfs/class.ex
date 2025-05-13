@@ -5,30 +5,39 @@ defmodule AshRdf.Dsl.Sections.Rdfs.Class do
   Classes in RDFS represent categories or types of resources.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:class)
-    desc("Defines an RDFS class")
-    
-    option :name, :atom,
-      required: true,
-      doc: "The name of the class"
-      
-    option :uri, :string,
-      doc: "The URI for this class (will be combined with base_uri if relative)"
-      
-    has_many :subclass_of, AshRdf.Dsl.Sections.Rdfs.SubclassOf,
-      default: [],
-      doc: "Classes that this class is a subclass of"
-      
-    option :label, :string,
-      doc: "Human-readable label for the class"
-      
-    option :comment, :string,
-      doc: "Human-readable description of the class"
-      
-    option :see_also, :string,
-      doc: "Related resource to this class"
-  end
+  @section %Spark.Dsl.Section{
+    name: :class,
+    describe: "Defines an RDFS class",
+    schema: [
+      name: [
+        type: :atom,
+        required: true,
+        doc: "The name of the class"
+      ],
+      uri: [
+        type: :string,
+        doc: "The URI for this class (will be combined with base_uri if relative)"
+      ],
+      label: [
+        type: :string,
+        doc: "Human-readable label for the class"
+      ],
+      comment: [
+        type: :string,
+        doc: "Human-readable description of the class"
+      ],
+      see_also: [
+        type: :string,
+        doc: "Related resource to this class"
+      ]
+    ],
+    sections: [
+      AshRdf.Dsl.Sections.Rdfs.SubclassOf.build()
+    ]
+  }
+  
+  @doc """
+  Returns the RDFS class DSL section.
+  """
+  def build, do: @section
 end

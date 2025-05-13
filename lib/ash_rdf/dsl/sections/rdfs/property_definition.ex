@@ -6,33 +6,43 @@ defmodule AshRdf.Dsl.Sections.Rdfs.PropertyDefinition do
   like domain, range, subproperty relationships, and documentation.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:property)
-    desc("Defines an RDFS property with enhanced metadata")
-    
-    option :name, :atom,
-      required: true,
-      doc: "The name of the property"
-      
-    option :uri, :string,
-      doc: "The URI for this property"
-      
-    option :domain, :string,
-      doc: "The domain (class) of this property"
-      
-    option :range, :string,
-      doc: "The range (class or datatype) of this property"
-      
-    has_many :subproperty_of, AshRdf.Dsl.Sections.Rdfs.SubpropertyOf,
-      default: [],
-      doc: "Properties that this property is a subproperty of"
-      
-    option :label, :string,
-      doc: "Human-readable label for the property"
-      
-    option :comment, :string,
-      doc: "Human-readable description of the property"
-  end
+  @section %Spark.Dsl.Section{
+    name: :property,
+    describe: "Defines an RDFS property with enhanced metadata",
+    schema: [
+      name: [
+        type: :atom,
+        required: true,
+        doc: "The name of the property"
+      ],
+      uri: [
+        type: :string,
+        doc: "The URI for this property"
+      ],
+      domain: [
+        type: :string,
+        doc: "The domain (class) of this property"
+      ],
+      range: [
+        type: :string,
+        doc: "The range (class or datatype) of this property"
+      ],
+      label: [
+        type: :string,
+        doc: "Human-readable label for the property"
+      ],
+      comment: [
+        type: :string,
+        doc: "Human-readable description of the property"
+      ]
+    ],
+    sections: [
+      AshRdf.Dsl.Sections.Rdfs.SubpropertyOf.build()
+    ]
+  }
+  
+  @doc """
+  Returns the RDFS property definition DSL section.
+  """
+  def build, do: @section
 end

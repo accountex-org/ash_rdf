@@ -6,39 +6,51 @@ defmodule AshRdf.Dsl.Sections.Owl.Ontology do
   describe a domain of interest.
   """
 
-  use Spark.Dsl.Section
-
-  dsl_section do
-    section_name(:ontology)
-    desc("Defines an OWL2 ontology")
-    
-    option :uri, :string,
-      required: true,
-      doc: "The URI for this ontology"
-      
-    option :version, :string,
-      doc: "The version of this ontology"
-      
-    has_many :imports, AshRdf.Dsl.Sections.Owl.Import,
-      default: [],
-      doc: "Ontologies imported by this ontology"
-      
-    option :prefix, :string,
-      doc: "The preferred prefix for this ontology"
-      
-    option :label, :string,
-      doc: "Human-readable label for the ontology"
-      
-    option :comment, :string,
-      doc: "Human-readable description of the ontology"
-      
-    option :prior_version, :string,
-      doc: "URI of the prior version of this ontology"
-      
-    option :backward_compatible_with, :string,
-      doc: "URI of a prior version that this version is compatible with"
-      
-    option :incompatible_with, :string,
-      doc: "URI of a prior version that this version is incompatible with"
-  end
+  @section %Spark.Dsl.Section{
+    name: :ontology,
+    describe: "Defines an OWL2 ontology",
+    schema: [
+      uri: [
+        type: :string,
+        required: true,
+        doc: "The URI for this ontology"
+      ],
+      version: [
+        type: :string,
+        doc: "The version of this ontology"
+      ],
+      prefix: [
+        type: :string,
+        doc: "The preferred prefix for this ontology"
+      ],
+      label: [
+        type: :string,
+        doc: "Human-readable label for the ontology"
+      ],
+      comment: [
+        type: :string,
+        doc: "Human-readable description of the ontology"
+      ],
+      prior_version: [
+        type: :string,
+        doc: "URI of the prior version of this ontology"
+      ],
+      backward_compatible_with: [
+        type: :string,
+        doc: "URI of a prior version that this version is compatible with"
+      ],
+      incompatible_with: [
+        type: :string,
+        doc: "URI of a prior version that this version is incompatible with"
+      ]
+    ],
+    sections: [
+      AshRdf.Dsl.Sections.Owl.Import.build()
+    ]
+  }
+  
+  @doc """
+  Returns the OWL ontology DSL section.
+  """
+  def build, do: @section
 end
