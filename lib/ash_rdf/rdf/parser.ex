@@ -61,7 +61,7 @@ defmodule AshRdf.Rdf.Parser do
     cond do
       # Full URI
       String.starts_with?(uri_str, "<") and String.ends_with?(uri_str, ">") ->
-        uri_str |> String.slice(1..-2)
+        uri_str |> String.slice(1, String.length(uri_str) - 2)
         
       # Prefixed name
       String.contains?(uri_str, ":") ->
@@ -92,19 +92,19 @@ defmodule AshRdf.Rdf.Parser do
       # Language tagged string
       String.match?(object_str, ~r/"[^"]*"@\w+/) ->
         [value, lang] = String.split(object_str, "@")
-        value = value |> String.slice(1..-2) |> unescape_string()
+        value = value |> String.slice(1, String.length(value) - 2) |> unescape_string()
         {value, nil, lang}
         
       # Datatyped literal
       String.match?(object_str, ~r/"[^"]*"\^\^/) ->
         [value, datatype] = String.split(object_str, "^^")
-        value = value |> String.slice(1..-2) |> unescape_string()
+        value = value |> String.slice(1, String.length(value) - 2) |> unescape_string()
         datatype = normalize_uri(datatype, prefixes)
         {value, datatype, nil}
         
       # Plain literal
       String.starts_with?(object_str, "\"") and String.ends_with?(object_str, "\"") ->
-        {object_str |> String.slice(1..-2) |> unescape_string(), nil, nil}
+        {object_str |> String.slice(1, String.length(object_str) - 2) |> unescape_string(), nil, nil}
         
       # Something else
       true ->
@@ -153,19 +153,19 @@ defmodule AshRdf.Rdf.Parser do
       # Language tagged string
       String.match?(object_str, ~r/"[^"]*"@\w+/) ->
         [value, lang] = String.split(object_str, "@")
-        value = value |> String.slice(1..-2) |> unescape_string()
+        value = value |> String.slice(1, String.length(value) - 2) |> unescape_string()
         {value, nil, lang}
         
       # Datatyped literal
       String.match?(object_str, ~r/"[^"]*"\^\^/) ->
         [value, datatype] = String.split(object_str, "^^")
-        value = value |> String.slice(1..-2) |> unescape_string()
+        value = value |> String.slice(1, String.length(value) - 2) |> unescape_string()
         datatype = datatype |> String.trim_leading("<") |> String.trim_trailing(">")
         {value, datatype, nil}
         
       # Plain literal
       String.starts_with?(object_str, "\"") and String.ends_with?(object_str, "\"") ->
-        {object_str |> String.slice(1..-2) |> unescape_string(), nil, nil}
+        {object_str |> String.slice(1, String.length(object_str) - 2) |> unescape_string(), nil, nil}
         
       # Something else
       true ->

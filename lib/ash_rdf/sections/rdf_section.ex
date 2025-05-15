@@ -1,8 +1,8 @@
 defmodule AshRdf.Sections.RdfSection do
   @moduledoc """
-  Defines the schema and entities for the `rdf` section of the AshRdf DSL.
+  DSL section for core RDF (Resource Description Framework) concepts.
   
-  This section defines the core RDF (Resource Description Framework) concepts:
+  This section defines the basic RDF constructs:
   - Resources (subjects)
   - Properties (predicates)
   - Values (objects)
@@ -39,6 +39,7 @@ defmodule AshRdf.Sections.RdfSection do
       # Resource entity
       %Spark.Dsl.Entity{
         name: :resource,
+        target: AshRdf.Entities.Resource,
         describe: "Defines an RDF resource (subject)",
         schema: [
           uri: [
@@ -61,6 +62,7 @@ defmodule AshRdf.Sections.RdfSection do
       # Property entity
       %Spark.Dsl.Entity{
         name: :property,
+        target: AshRdf.Entities.Property,
         describe: "Defines an RDF property (predicate)",
         schema: [
           uri: [
@@ -78,6 +80,7 @@ defmodule AshRdf.Sections.RdfSection do
       # Statement entity
       %Spark.Dsl.Entity{
         name: :statement,
+        target: AshRdf.Entities.Statement,
         describe: "Defines an RDF statement (triple)",
         schema: [
           subject: [
@@ -112,6 +115,7 @@ defmodule AshRdf.Sections.RdfSection do
   defp identifier_entity do
     %Spark.Dsl.Entity{
       name: :identifier,
+      target: AshRdf.Entities.Identifier,
       describe: "Identifies a resource or property",
       schema: [
         name: [

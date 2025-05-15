@@ -200,7 +200,7 @@ defmodule AshRdf.Owl.Restriction do
   
   This generates statements connecting a class to the restrictions that apply to it.
   """
-  def create_class_restriction_statements(resource, class_entity) do
+  def create_class_restriction_statements(_resource, _class_entity) do
     # This would typically be part of the class definition
     # But restrictions often need to be linked to classes
     []

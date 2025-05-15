@@ -37,6 +37,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Ontology entity
       %Spark.Dsl.Entity{
         name: :ontology,
+        target: AshRdf.Entities.Ontology,
         describe: "Defines an OWL2 ontology",
         schema: [
           uri: [
@@ -67,6 +68,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Class definition entity
       %Spark.Dsl.Entity{
         name: :class_definition,
+        target: AshRdf.Entities.ClassDefinition,
         describe: "Defines an OWL2 class",
         schema: [
           name: [
@@ -101,6 +103,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Property definition entity
       %Spark.Dsl.Entity{
         name: :property_definition,
+        target: AshRdf.Entities.PropertyDefinition,
         describe: "Defines an OWL2 property",
         schema: [
           name: [
@@ -174,6 +177,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Individual entity
       %Spark.Dsl.Entity{
         name: :individual,
+        target: AshRdf.Entities.Individual,
         describe: "Defines an OWL2 individual",
         schema: [
           name: [
@@ -205,6 +209,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Restriction entity
       %Spark.Dsl.Entity{
         name: :restriction,
+        target: AshRdf.Entities.Restriction,
         describe: "Defines an OWL2 property restriction",
         schema: [
           name: [
@@ -251,6 +256,7 @@ defmodule AshRdf.Sections.OwlSection do
       # Type declaration entity
       %Spark.Dsl.Entity{
         name: :type,
+        target: AshRdf.Entities.Type,
         describe: "Declares a type (class) for a resource",
         schema: [
           class_uri: [
@@ -267,6 +273,7 @@ defmodule AshRdf.Sections.OwlSection do
   defp import_entity do
     %Spark.Dsl.Entity{
       name: :import,
+      target: AshRdf.Entities.Import,
       describe: "Imports an external ontology",
       schema: [
         uri: [
@@ -282,6 +289,7 @@ defmodule AshRdf.Sections.OwlSection do
   defp equivalent_class_entity do
     %Spark.Dsl.Entity{
       name: :equivalent_class,
+      target: AshRdf.Entities.EquivalentClass,
       describe: "Defines an equivalent class relationship",
       schema: [
         class_uri: [
@@ -297,6 +305,7 @@ defmodule AshRdf.Sections.OwlSection do
   defp disjoint_class_entity do
     %Spark.Dsl.Entity{
       name: :disjoint_class,
+      target: AshRdf.Entities.DisjointClass,
       describe: "Defines a disjoint class relationship",
       schema: [
         class_uri: [
@@ -312,6 +321,7 @@ defmodule AshRdf.Sections.OwlSection do
   defp property_assertion_entity do
     %Spark.Dsl.Entity{
       name: :property_assertion,
+      target: AshRdf.Entities.PropertyAssertion,
       describe: "Asserts a property value for an individual",
       schema: [
         property: [

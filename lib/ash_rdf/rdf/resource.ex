@@ -3,7 +3,7 @@ defmodule AshRdf.Rdf.Resource do
   Functions for handling RDF resources and their integration with Ash resources.
   """
   
-  alias AshRdf.Rdf.{Statement, Uri}
+  alias AshRdf.Rdf.Statement
   alias Spark.Dsl.Extension
   
   @doc """
@@ -121,19 +121,19 @@ defmodule AshRdf.Rdf.Resource do
     attribute_statements ++ relationship_statements
   end
   
-  defp get_property_uri(resource_module, attribute) do
+  defp get_property_uri(_resource_module, _attribute) do
     # This would look for RDF property definitions in the DSL
     # For now, a simple implementation that returns nil (using default)
     nil
   end
   
-  defp get_relationship_uri(resource_module, relationship) do
+  defp get_relationship_uri(_resource_module, _relationship) do
     # This would look for RDF property definitions for relationships in the DSL
     # For now, a simple implementation that returns nil (using default)
     nil
   end
   
-  defp get_datatype(attribute, value) do
+  defp get_datatype(attribute, _value) do
     # Get datatype from attribute definition or infer from value
     case attribute.type do
       :string -> "http://www.w3.org/2001/XMLSchema#string"
@@ -151,9 +151,9 @@ defmodule AshRdf.Rdf.Resource do
   @doc """
   Creates a resource instance from RDF statements.
   """
-  def from_rdf(resource_module, statements) do
+  def from_rdf(_resource_module, statements) do
     # Group statements by subject
-    statements_by_subject = Enum.group_by(statements, & &1.subject)
+    _statements_by_subject = Enum.group_by(statements, & &1.subject)
     
     # This would create new Ash resource instances from the RDF data
     # Would need to match subject URIs to resources, predicates to attributes/relationships

@@ -4,7 +4,7 @@ defmodule AshRdf.Owl.Ontology do
   """
   
   alias Spark.Dsl.Extension
-  alias AshRdf.Rdf.{Statement, Uri}
+  alias AshRdf.Rdf.Statement
   
   @owl_namespace "http://www.w3.org/2002/07/owl#"
   @rdf_namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -31,7 +31,7 @@ defmodule AshRdf.Owl.Ontology do
   @doc """
   Gets the URI for an OWL ontology.
   """
-  def ontology_uri(resource, ontology_entity) do
+  def ontology_uri(_resource, ontology_entity) do
     ontology_entity.uri
   end
   

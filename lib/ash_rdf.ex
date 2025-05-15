@@ -19,9 +19,25 @@ defmodule AshRdf do
     use Ash.Resource,
       extensions: [AshRdf]
       
-    rdf do
-      base_uri "http://example.org/people/"
-      prefix "people"
+    ash_rdf do
+      rdf do
+        base_uri "http://example.org/people/"
+        prefix "people"
+      end
+      
+      rdfs do
+        class name: :person do
+          label "Person"
+          comment "A human being"
+        end
+      end
+      
+      owl do
+        ontology do
+          uri "http://example.org/ontology/"
+          version "1.0.0"
+        end
+      end
     end
     
     # Define your resource attributes, relationships, etc.
@@ -60,21 +76,22 @@ defmodule AshRdf do
   - Integrating Ash resources with the semantic web
   """
 
-  use Spark.Dsl.Extension,
-    transformers: [
-      AshRdf.Transformers.ValidateRdfStructure
-    ],
-    verifiers: [
-      AshRdf.Verifiers.ValidateUri
-    ]
-
   @doc """
   Entrypoint for DSL-related functions.
   """
   defmacro __using__(opts \\ []) do
     quote do
-      use Ash.Resource, opts: unquote(opts)
-      use AshRdf.Dsl
+      use Ash.Resource, 
+        extensions: [AshRdf.Dsl] ++ Keyword.get(unquote(opts), :extensions, []), 
+        domain: Keyword.get(unquote(opts), :domain, nil)
     end
+  end
+  
+  @doc """
+  Check if a resource uses AshRdf.
+  """
+  @spec extension?(Ash.Resource.t()) :: boolean
+  def extension?(resource) do
+    AshRdf.Dsl.extension?(resource)
   end
 end

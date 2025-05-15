@@ -1,12 +1,9 @@
 defmodule AshRdf.Sections.RdfsSection do
   @moduledoc """
-  Defines the schema and entities for the `rdfs` section of the AshRdf DSL.
+  DSL section for RDF Schema (RDFS) concepts.
   
-  RDFS (RDF Schema) extends RDF with additional vocabulary for describing:
-  - Classes
-  - Subclasses
-  - Properties with domains and ranges
-  - Hierarchical relationships
+  RDFS extends RDF with additional vocabulary for describing
+  classes, subclasses, properties, domains, and ranges.
   """
   
   @doc """
@@ -30,6 +27,7 @@ defmodule AshRdf.Sections.RdfsSection do
       # Class entity
       %Spark.Dsl.Entity{
         name: :class,
+        target: AshRdf.Entities.Class,
         describe: "Defines an RDFS class",
         schema: [
           name: [
@@ -56,6 +54,7 @@ defmodule AshRdf.Sections.RdfsSection do
       # Property definition entity
       %Spark.Dsl.Entity{
         name: :property_definition,
+        target: AshRdf.Entities.PropertyDefinition,
         describe: "Defines an RDFS property",
         schema: [
           name: [
@@ -93,6 +92,7 @@ defmodule AshRdf.Sections.RdfsSection do
   defp subclass_of_entity do
     %Spark.Dsl.Entity{
       name: :subclass_of,
+      target: AshRdf.Entities.SubclassOf,
       describe: "Defines a subclass relationship",
       schema: [
         class_uri: [
@@ -108,6 +108,7 @@ defmodule AshRdf.Sections.RdfsSection do
   defp subproperty_of_entity do
     %Spark.Dsl.Entity{
       name: :subproperty_of,
+      target: AshRdf.Entities.SubpropertyOf,
       describe: "Defines a subproperty relationship",
       schema: [
         property_uri: [

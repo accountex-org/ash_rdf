@@ -3,7 +3,7 @@ defmodule AshRdf.Rdf.Graph do
   Represents an RDF graph, which is a collection of RDF statements.
   """
   
-  alias AshRdf.Rdf.{Statement, Uri}
+  alias AshRdf.Rdf.Statement
   
   defstruct [
     :name,
