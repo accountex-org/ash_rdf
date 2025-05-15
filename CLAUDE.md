@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-AshRdf is an Elixir package in early development stages that appears intended to provide RDF (Resource Description Framework) functionality for the Ash Framework. The project currently contains only a skeleton structure with placeholder functionality.
+AshRdf is an Elixir extension for the Ash Framework that provides capabilities for working with RDF (Resource Description Framework) data and ontologies. The project is in early development (v0.1.0) with basic functionality implemented but still needs more work.
+
+AshRdf implements support for:
+- **RDF Core**: Working with resources, properties, literals, and statements (triples)
+- **RDFS (RDF Schema)**: Classes, subclasses, property definitions, domains, and ranges
+- **OWL2 (Web Ontology Language)**: Complex class relationships, property characteristics, and logical constraints
+- **Serialization**: Export data in Turtle, N-Triples, and JSON-LD formats
+- **Integration**: Map Ash resources to RDF/OWL representations
 
 ## Commands
 
@@ -34,21 +41,32 @@ mix test test/file_path.exs:line_number
 
 ### Documentation
 ```bash
-# Generate documentation (requires ex_doc to be added to dependencies first)
+# Generate documentation
 mix docs
 ```
 
 ## Architecture
 
-The project is in the very early stages of development, with only a minimal structure:
+The project is structured around three main components:
 
-- Main module `AshRdf` in `lib/ash_rdf.ex` with placeholder functionality
-- Basic test suite in `test/ash_rdf_test.exs`
+1. **Core Module**: `AshRdf` (`lib/ash_rdf.ex`) - Uses Spark.Dsl.Extension with transformers and verifiers
+2. **DSL Definition**: `AshRdf.Dsl` (`lib/ash_rdf/dsl.ex`) - Provides DSL sections for RDF, RDFS, and OWL
+3. **Main Components**:
+   - `AshRdf.Rdf` - Core RDF functionality (graphs, statements, resources, URIs)
+   - `AshRdf.Rdfs` - RDFS extensions (classes, properties, hierarchies)
+   - `AshRdf.Owl` - OWL features (ontologies, restrictions, class expressions)
 
-The project likely aims to integrate with the Ash Framework to provide RDF capabilities, but no implementation has been started yet.
+Implementation includes:
+- Transformers for validation (`AshRdf.Transformers.ValidateRdfStructure`)
+- Verifiers for URI validation (`AshRdf.Verifiers.ValidateUri`)
+- Serialization/deserialization for different RDF formats
 
 ## Development Environment
 
 - Requires Elixir ~> 1.18
-- Uses `igniter` (~> 0.5) for development tooling
+- Dependencies:
+  - ash (~> 3.0)
+  - spark (~> 2.0)
+  - igniter (~> 0.5) for development tooling
+  - ex_doc (~> 0.27) for documentation
 - Protocol consolidation is disabled in development environment
