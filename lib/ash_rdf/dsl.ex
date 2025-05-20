@@ -32,6 +32,29 @@ defmodule AshRdf.Dsl do
           version "1.0.0"
         end
       end
+      
+      sparql do
+        endpoints do
+          endpoint "http://localhost:8890/sparql"
+          connection_type :http
+          auth_method :basic
+          auth_options username: "dba", password: "dba"
+        end
+        
+        default_prefixes do
+          prefix "foaf"
+          uri "http://xmlns.com/foaf/0.1/"
+        end
+        
+        mappings do
+          from "foaf:Person"
+          to MyApp.People.Person
+          properties [
+            name: "foaf:name",
+            age: "foaf:age"
+          ]
+        end
+      end
     end
     
     # Define your resource attributes, relationships, etc.
@@ -511,7 +534,7 @@ defmodule AshRdf.Dsl do
       @rdf_section,
       @rdfs_section,
       @owl_section
-    ]
+    ] ++ AshRdf.Dsl.Sections.sections()
   }
   
   # The main extension
